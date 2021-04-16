@@ -1,0 +1,5 @@
+const PREFFIX = '@app';
+
+export const GET_CITIES = `${PREFFIX}/GET_CITIES`;
+export const GET_CITIES_SUCCESS = `${PREFFIX}/GET_CITIES_SUCCESS`;
+export const GET_CITIES_ERROR = `${PREFFIX}/GET_CITIES_ERROR`;

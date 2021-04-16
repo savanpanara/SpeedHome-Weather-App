@@ -53,6 +53,6 @@ const PlainText = props => (
   />
 );
 
-export {HeadingText, SubHeadingText};
+export {HeadingText, SubHeadingText, PlainText};
 
 export default PlainText;

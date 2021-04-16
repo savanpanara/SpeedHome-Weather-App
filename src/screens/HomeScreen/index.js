@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, Text} from '@components';
-
-const HomeScreen = () => {
+import {connect} from 'react-redux';
+import {getCities} from '@src/store/actions';
+import List from './widget/List';
+const HomeScreen = ({getCities}) => {
+  useEffect(() => {
+    getCities();
+  }, []);
   return (
     <Box>
-      <Text>HomeScreen</Text>
+      <List />
     </Box>
   );
 };
-
-export default HomeScreen;
+export default connect(null, {getCities})(HomeScreen);
