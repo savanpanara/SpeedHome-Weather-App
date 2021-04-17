@@ -3,13 +3,13 @@ import {Box, Text} from '@components';
 import {connect} from 'react-redux';
 import {getCities} from '@src/store/actions';
 import List from './widget/List';
-const HomeScreen = ({getCities}) => {
+const HomeScreen = ({getCities, navigation}) => {
   useEffect(() => {
     getCities();
   }, []);
   return (
     <Box>
-      <List />
+      <List navigation={navigation} />
     </Box>
   );
 };

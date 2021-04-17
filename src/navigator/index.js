@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {HOME_SCREEN, DETAILS_SCREEN} from '@routes';
 import {HomeScreen, DetailsScreen} from '@src/screens';
 import {colors} from '../theme';
@@ -18,9 +18,23 @@ const Navigator = () => {
           headerTitleStyle: {
             color: colors.white,
           },
+          headerTintColor: colors.white,
         }}>
-        <Stack.Screen name={HOME_SCREEN} component={HomeScreen} />
-        <Stack.Screen name={DETAILS_SCREEN} component={DetailsScreen} />
+        <Stack.Screen
+          options={{
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+          name={HOME_SCREEN}
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          options={{
+            headerBackTitleVisible: false,
+            ...TransitionPresets.SlideFromRightIOS,
+          }}
+          name={DETAILS_SCREEN}
+          component={DetailsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

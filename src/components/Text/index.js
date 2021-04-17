@@ -47,7 +47,6 @@ const PlainText = props => (
   <Text
     fontFamily={fonts.regular}
     fontSize={fontSizes[1]}
-    lineHeight={22}
     letterSpacing={0.3}
     {...props}
   />
