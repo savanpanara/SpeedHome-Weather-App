@@ -22,7 +22,10 @@ const CityWeather = ({city}) => {
         <PlainText mb={1}>{`Min. Temp: ${main.temp_min}`}</PlainText>
       </Box>
       <Box alignItems={'center'} justifyContent={'center'}>
-        <PlainText fontSize={fontSizes[5]}>{`${main.temp}`}</PlainText>
+        <PlainText fontSize={fontSizes[5]}>
+          {`${main.temp}°`}
+          <PlainText fontSize={fontSizes[3]}>{'C'}</PlainText>
+        </PlainText>
         <Image
           height={ms(120)}
           width={ms(200)}
