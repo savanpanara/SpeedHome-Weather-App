@@ -3,9 +3,12 @@ import {StatusBar} from 'react-native';
 import Navigator from '@src/navigator';
 import {colors} from '@src/theme';
 import {LocalNotification} from '@src/utils/pushNotification';
+import PushNotification from 'react-native-push-notification';
 
 const App = () => {
   useEffect(() => {
+    //remove previous notification
+    PushNotification.removeAllDeliveredNotifications();
     LocalNotification();
   }, []);
 
