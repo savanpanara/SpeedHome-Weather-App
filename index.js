@@ -8,6 +8,9 @@ import {name as appName} from './app.json';
 import {Provider} from 'react-redux';
 import React from 'react';
 import store from '@src/store';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 const MainApp = () => {
   return (
