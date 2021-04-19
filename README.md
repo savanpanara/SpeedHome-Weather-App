@@ -4,7 +4,8 @@
 * git clone `https://github.com/savanpanara/SpeedHome-Weather-App.git`
 
 ## Installation
-* Install npm packages with `npm install`
+* Install npm packages with yarn `yarn`
+* Install npm packages with npm `npm install`
 
 ## iOS instructions
 ### if cocoa pods not installed
