@@ -10,7 +10,6 @@ const initialState = {
 };
 
 const reducers = (state = initialState, action) => {
-  console.log('LOGGER', action);
   switch (action.type) {
     case types.GET_CITIES_SUCCESS: {
       return {...state, cities: action.payload};
