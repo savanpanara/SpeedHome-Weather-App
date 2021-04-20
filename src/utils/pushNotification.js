@@ -1,5 +1,6 @@
 import PushNotification from 'react-native-push-notification';
 import {Platform} from 'react-native';
+import store from '../store/index';
 
 PushNotification.configure({
   onNotification: function (notification) {
@@ -22,11 +23,13 @@ PushNotification.createChannel(
   created => console.log(`createChannel returned '${created}'`),
 );
 export const LocalNotification = () => {
+  const getStoreData = store?.getState()?.app;
+  const temp = getStoreData?.currentTemp?.temp;
   PushNotification.localNotification({
     autoCancel: true,
     channelId: 'com.speedHome',
     title: 'WeatherApp',
-    message: 'Current Temperature: 28°c',
+    message: `Current Temperature: ${temp}°c`,
     vibrate: true,
     vibration: 300,
     playSound: true,
