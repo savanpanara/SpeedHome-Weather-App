@@ -9,37 +9,7 @@ import Geolocation from 'react-native-geolocation-service';
 import {getTemperature, getCurrentTemparature} from '@src/store/actions';
 
 const App = ({getTemperature, getCurrentTemparature}) => {
-  useEffect(() => {
-    //remove previous notification
-    PushNotification.removeAllDeliveredNotifications();
-    // LocalNotification();
-    // Geolocation.requestAuthorization('whenInUse')
-    //   .then(res => {
-    //     console.log('res', res);
-    //     if (res === 'granted') {
-    //       Geolocation.getCurrentPosition(
-    //         position => {
-    //           console.log('position>>>', position);
-    //         },
-    //         error => {
-    //           Alert.alert(`Code ${error.code}`, error.message);
-    //           console.log('error', error);
-    //         },
-    //         {
-    //           accuracy: {
-    //             android: 'high',
-    //             ios: 'best',
-    //           },
-    //           timeout: 15000,
-    //           maximumAge: 10000,
-    //           distanceFilter: 0,
-    //         },
-    //       );
-    //     }
-    //   })
-    //   .catch(e => {
-    //     console.log('e', e);
-    //   });
+  const getLocation = () => {
     Geolocation.getCurrentPosition(
       position => {
         console.log('position:::', position);
@@ -80,6 +50,35 @@ const App = ({getTemperature, getCurrentTemparature}) => {
         distanceFilter: 0,
       },
     );
+  };
+
+  const requestPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        getLocation();
+      } else {
+        console.log('location permission denied');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    //remove previous notification
+    PushNotification.removeAllDeliveredNotifications();
+    // LocalNotification();
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization('whenInUse').then(res => {
+        if (res === 'granted') {
+          getLocation();
+        }
+      });
+    } else {
+      requestPermission();
+    }
   }, []);
   return (
     <>
