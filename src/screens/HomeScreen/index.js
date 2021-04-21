@@ -1,39 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Text} from '@components';
-import {ActivityIndicator} from 'react-native';
+import React, {useEffect} from 'react';
+import {Box, Loader} from '@components';
 import {connect} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 import {getCities} from '@src/store/actions';
 import List from './widget/List';
-import {colors} from '../../theme';
-const HomeScreen = ({getCities, navigation}) => {
-  const [isLoading, setLoading] = useState(true);
+const HomeScreen = ({getCities, navigation, cities}) => {
+  console.log('cities::', cities);
+  const isFocused = useIsFocused();
   useEffect(() => {
-    const func = async () => {
-      try {
-        getCities();
-      } catch (e) {
-        alert('error while get cities');
-      } finally {
-        setLoading(false);
-      }
-    };
-    func();
-  }, []);
+    if (isFocused) {
+      const func = async () => {
+        try {
+          getCities();
+        } catch (e) {
+          alert('error while get cities');
+        }
+      };
+      func();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocused]);
 
-  const Loader = () => {
-    return (
-      <Box
-        backgroundColor={colors.white}
-        justifyContent={'center'}
-        flex={1}
-        alignItems={'center'}>
-        <ActivityIndicator size="large" color={colors.black} />
-      </Box>
-    );
-  };
   return (
     <>
-      {isLoading ? (
+      {cities?.loading ? (
         <Loader />
       ) : (
         <Box>
@@ -43,4 +33,7 @@ const HomeScreen = ({getCities, navigation}) => {
     </>
   );
 };
-export default connect(null, {getCities})(HomeScreen);
+
+const mapStateToProps = ({app: {cities}}) => ({cities});
+
+export default connect(mapStateToProps, {getCities})(HomeScreen);

@@ -3,12 +3,15 @@ import {
   StyleSheet,
   View,
   useWindowDimensions,
-  SafeAreaView,
+  Image,
 } from 'react-native';
-import {Box, Text} from '@components';
+import {Box, HeadingText} from '@components';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import {vs} from 'react-native-size-matters';
+import {ms} from 'react-native-size-matters';
+import {ic_location} from '../../../assets/images/index';
 import CityWeather from './CityWeather';
+import {fontSizes} from '../../../theme';
+
 const Map = ({city}) => {
   const {height} = useWindowDimensions();
   const location = useMemo(() => {
@@ -30,7 +33,17 @@ const Map = ({city}) => {
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
         region={location}>
-        <Marker coordinate={location} />
+        <Marker coordinate={location} title={city?.name}>
+          <View style={{alignItems: 'center'}}>
+            <Image
+              source={ic_location}
+              style={{height: ms(40), width: ms(40), resizeMode: 'contain'}}
+            />
+            <HeadingText mb={2} fontSize={fontSizes[2]}>
+              {city?.name}
+            </HeadingText>
+          </View>
+        </Marker>
       </MapView>
       <CityWeather city={city} />
     </Box>

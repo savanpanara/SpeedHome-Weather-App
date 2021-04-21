@@ -18,6 +18,7 @@ const Navigator = () => {
           headerTitleStyle: {
             color: colors.white,
           },
+          headerTitleAlign: 'center',
           headerTintColor: colors.white,
         }}>
         <Stack.Screen

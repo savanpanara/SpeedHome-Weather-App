@@ -7,14 +7,13 @@ import {LocalNotification} from '@src/utils/pushNotification';
 import PushNotification from 'react-native-push-notification';
 import Geolocation from 'react-native-geolocation-service';
 import {getTemperature, getCurrentTemparature} from '@src/store/actions';
+import {Loader} from '@components';
 
-const App = ({getTemperature, getCurrentTemparature}) => {
+const App = ({getTemperature, getCurrentTemparature, temperature}) => {
   const getLocation = () => {
     Geolocation.getCurrentPosition(
       position => {
-        console.log('position:::', position);
         const {coords} = position;
-        console.log('coords::', coords);
         const func = async () => {
           try {
             const params = {
@@ -81,14 +80,20 @@ const App = ({getTemperature, getCurrentTemparature}) => {
       requestPermission();
     }
   }, []);
+
   return (
     <>
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={colors.darkGreen}
       />
-      <Navigator />
+      {temperature?.loading ? <Loader /> : <Navigator />}
     </>
   );
 };
-export default connect(null, {getTemperature, getCurrentTemparature})(App);
+const mapStateToProps = ({app: {temperature}}) => ({temperature});
+
+export default connect(mapStateToProps, {
+  getTemperature,
+  getCurrentTemparature,
+})(App);
