@@ -66,6 +66,7 @@ const App = ({getTemperature, getCurrentTemparature}) => {
       console.log(err);
     }
   };
+
   useEffect(() => {
     //remove previous notification
     PushNotification.removeAllDeliveredNotifications();

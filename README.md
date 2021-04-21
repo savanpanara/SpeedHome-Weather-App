@@ -18,3 +18,9 @@
 ## Android instructions     
 * Start emulator or connect phone
 * Run `react-native run-android` or press run in Android Studio
+
+## .env instructions
+
+* create .env file in your root folder
+* copy example from .env.example
+* replace your token in token field
