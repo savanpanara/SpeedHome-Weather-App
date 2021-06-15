@@ -4,8 +4,10 @@ import {connect} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {getCities} from '@src/store/actions';
 import List from './widget/List';
+import {API_URL, API_TOKEN} from '@env';
+
 const HomeScreen = ({getCities, navigation, cities}) => {
-  console.log('cities::', cities);
+  console.log('cities::', API_URL, API_TOKEN);
   const isFocused = useIsFocused();
   useEffect(() => {
     if (isFocused) {

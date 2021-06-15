@@ -10,7 +10,7 @@ const List = ({cities, navigation}) => {
   return (
     <Box backgroundColor={colors.white} as={SafeAreaView}>
       <ScrollView>
-        {cities?.list.map((city, key) => {
+        {cities?.list?.map((city, key) => {
           return (
             <Box key={`${key}`}>
               <TouchableOpacity
